@@ -9,17 +9,17 @@
 </head>
 <body>
     <header>
-        <div class="high-scores">
+        <div>
             <a class="high-score" href="#">View High Scores</a>
         </div>
     </header>
-    <Main>
+    <main>
        <section>
             <div class="quiz">
                 <h1>Coding Quiz!</h1>
-                <h3>This quiz will test your knowledge of basic coding.</h3>
-                <h3>Try to answer all the questions in 60 seconds or less.</h3>
-                <h3>If you answer a question incorrectly, you will lose 10 seconds!</h3>
+                <h4>This quiz will test your knowledge of basic coding.</h4>
+                <h4>Try to answer all the questions in 60 seconds or less.</h4>
+                <h4>If you answer a question incorrectly, you will lose 10 seconds!</h4>
                 <button>Click to Play!</button>
             </div>
             <div class="answers">
@@ -28,9 +28,17 @@
                 <button class="answer-button"></button>
                 <button class="answer-button"></button>
             </div>
-       </section> 
-    </Main>
-    
+            <div class="record">
+                <input class="initials">Enter your initials</input>
+                <button class="submit">Submit</button>
+            </div>
+        </section>
+        <section>
+            <div class="timer-container">
+                <h1 class="timekeeping">Time Remaining: <span class="timer">0</span></h1>
+            </div>
+        </section> 
+    </main>
 </body>
 <script src="script.js"></script>
 </html>
