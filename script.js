@@ -13,8 +13,12 @@
 var highscore = document.getElementById('high-score');
 var welcome = document.getElementById('welcome');
 var start = document.getElementById('play-button');
-var questions = document.getElementById('questions');
+var questionsDiv = document.querySelector('#questions');
 var nextQuestion = document.getElementById('next-question');
+var a1 = document.getElementById('1');
+var a2 = document.getElementById('2');
+var a3 = document.getElementById('3');
+var a4 = document.getElementById('4');
 var answerButton = document.getElementById('answer-button');
 var record = document.getElementById('record');
 var initials = document.getElementById('initials');
@@ -30,32 +34,52 @@ var questionCount = 0;
 
 //Questions:
 var questions = [ {
-    question: 'What is the name of the default JavaScript behavior of moving variables and declarative functions to the top?',
-    options:['Trebuche', 'Hoisting', 'Lift-Off', 'Bumping' ],
-    answer: 'Hoisting'
+    nextQuestion: 'What is the name of the default JavaScript behavior of moving variables and declarative functions to the top?',
+    a1:'Trebuche',
+    a2:'Hoisting',
+    a3:'Lift-Off',
+    a4:'Bumping',
+    answer: 'Hoisting',
 },{
-    question:'What is NaN?',
-    options: ['Not-a-Number', 'New-article-Next', 'Never-a-Numeral', 'Noting-a-Number'],
+    nextQuestion :'What is NaN?',
+    a1:'Not-a-Number', 
+    a2:'New-article-Next', 
+    a3:'Never-a-Numeral', 
+    a4:'Noting-a-Number',
     answer: 'Not-a-Number',
 },{
-    question: 'Inside which HTML element do you put JavaScript?',
-    options:['<javascript>', '<code>', '<script>', '<js>'],
-    answer: '<script>',
+    nextQuestion: 'Inside which HTML element do you put JavaScript?',
+    a1:'<javascript>', 
+    a2:'<code>', 
+    a3:'<script>', 
+    a4:'<js>',
+    answer : '<script>',
 },{
-    question: 'Which operator is used to declare a variable?',
-    options:['*', '-', '===', '='],
+    nextQuestion: 'Which operator is used to declare a variable?',
+    a1:'*', 
+    a2:'-', 
+    a3:'===',
+    a4: '=',
     answer: '=',
 },{
-    question: 'What is the correct syntax for displaying a console log?',
-    options:['console.log;','log.console()','console.log[]','console.log()'],
+    nextQuestion: 'What is the correct syntax for displaying a console log?',
+    a1:'console.log;',
+    a2:'log.console()',
+    a3:'console.log[]',
+    a4:'console.log()',
     answer:'console.log',
-}]
+},]
+
+welcome.style.display ="block";
+questionsDiv.style.display ="none";
+record.style.display = "none";
 
 //Starts game and begins timer
 function startGame() {
     timeRemain = 60;
-    welcome.style.display = 'none';
-    questions.style.display = 'block';
+    welcome.style.display = "none";
+    questionsDiv.style.display = "block";
+
     var countdown = setInterval(function() {
         timeRemain--;
         timer.textContent = timeRemain;
@@ -64,7 +88,19 @@ function startGame() {
             score();
         }
     }, 1000);
+    showQuestions();
 }
+
+//Move page to first question when 
+function showQuestions() {
+    var quest = questions[questionCount];
+    nextQuestion.innerHTML = quest.nextQuestion;
+    a1.innerhtml = quest.a1;
+    a2.innerhtml = quest.a2;
+    a3.innerhtml = quest.a3;
+    a4.innerhtml = quest.a4;
+};
+
 
 //Start game on click 
 start.addEventListener('click', function (){
