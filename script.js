@@ -51,6 +51,7 @@ var questions = [ {
     answer:'console.log',
 }]
 
+//Starts game and begins timer
 function startGame() {
     timeRemain = 60;
     welcome.style.display = 'none';
@@ -62,6 +63,10 @@ function startGame() {
             clearInterval(countdown);
             score();
         }
-    }
-    )
+    }, 1000);
 }
+
+//Start game on click 
+start.addEventListener('click', function (){
+    startGame()
+})

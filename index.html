@@ -15,18 +15,21 @@
     </header>
     <main>
        <section>
-            <div id="quiz">
+            <div id="welcome">
                 <h1>Coding Quiz!</h1>
                 <h4>This quiz will test your knowledge of JavaScript fundamentals.</h4>
                 <h4>Try to answer all the questions in 60 seconds or less.</h4>
                 <h4>If you answer a question incorrectly, you will lose 10 seconds!</h4>
                 <button id="play-button">Click to Play!</button>
             </div>
-            <div id="answers">
-                <button id="answer-button"></button>
-                <button id="answer-button"></button>
-                <button id="answer-button"></button>
-                <button id="answer-button"></button>
+            <div id="questions">
+                <h3 id="next-question"></h3>
+                <ul>
+                    <li><button id="answer-button"></button></li>
+                    <li><button id="answer-button"></button></li>
+                    <li><button id="answer-button"></button></li>
+                    <li><button id="answer-button"></button></li>
+                </ul>
             </div>
             <div id="record">
                 <input id="initials">Enter your initials</input>
@@ -35,7 +38,7 @@
         </section>
         <section>
             <div id="timer-container">
-                <h1 id="timekeeping">Time Remaining: <span id="timer">0</span></h1>
+                <h1 id="timekeeping">Time Remaining: <span id="timer"></span></h1>
             </div>
         </section> 
     </main>
