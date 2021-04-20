@@ -1,8 +1,20 @@
+/*Psuedo Code:
+- Create a timer that starts when the start button is clicked.
+- move page to first question when start button is clicked.
+- present potential answers.
+- when answer is clicked
+    -if correct proceed to next question.
+    -if NOT correct deduct 10 seconds from timer and proceed to next question
+- end game when all questions are answered or timer equals 0
+- move page to initials capture form.
+- save initials and final timer reading for high score.*/
+
 //DOM retrieval:
 var highscore = document.getElementById('high-score');
-var quizContainer = document.getElementById('quiz');
+var welcome = document.getElementById('welcome');
 var start = document.getElementById('play-button');
-var answers = document.getElementById('answers');
+var questions = document.getElementById('questions');
+var nextQuestion = document.getElementById('next-question');
 var answerButton = document.getElementById('answer-button');
 var record = document.getElementById('record');
 var initials = document.getElementById('initials');
@@ -14,6 +26,7 @@ var timer = document.getElementById('timer');
 //Starting variables:
 var timeRemain = 0;
 var score = 0;
+var questionCount = 0;
 
 //Questions:
 var questions = [ {
@@ -36,6 +49,19 @@ var questions = [ {
     question: 'What is the correct syntax for displaying a console log?',
     options:['console.log;','log.console()','console.log[]','console.log()'],
     answer:'console.log',
-}
+}]
 
-]
+function startGame() {
+    timeRemain = 60;
+    welcome.style.display = 'none';
+    questions.style.display = 'block';
+    var countdown = setInterval(function() {
+        timeRemain--;
+        timer.textContent = timeRemain;
+        if (timeRemain === 0 || questions.length === questionCount){
+            clearInterval(countdown);
+            score();
+        }
+    }
+    )
+}
