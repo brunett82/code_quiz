@@ -15,10 +15,10 @@ var welcome = document.getElementById('welcome');
 var start = document.getElementById('play-button');
 var questionsDiv = document.querySelector('#questions');
 var nextQuestion = document.getElementById('next-question');
-var a1 = document.getElementById('button1');
-var a2 = document.getElementById('button2');
-var a3 = document.getElementById('button3');
-var a4 = document.getElementById('button4');
+var answerA = document.getElementById('button1');
+var answerB= document.getElementById('button2');
+var answerC= document.getElementById('button3');
+var answerD = document.getElementById('button4');
 var answerButton = document.getElementById('answer-button');
 var record = document.getElementById('record');
 var initials = document.getElementById('initials');
@@ -32,41 +32,42 @@ var timeRemain = 0;
 var score = 0;
 var questionCount = 0;
 
+
 //Questions:
-var questions = [ {
+var questions = [{
     nextQuestion : 'What is the name of the default JavaScript behavior of moving variables and declarative functions to the top?',
-    a1 :'Trebuche',
-    a2 :'Hoisting',
-    a3 :'Lift-Off',
-    a4 :'Bumping',
+    answerA :'Trebuche',
+    answerB :'Hoisting',
+    answerC :'Lift-Off',
+    answerD :'Bumping',
     answer : 'Hoisting',
 },{
     nextQuestion :'What is NaN?',
-    a1 :'Not-a-Number', 
-    a2 :'New-article-Next', 
-    a3 :'Never-a-Numeral', 
-    a4 :'Noting-a-Number',
+    answerA :'Not-a-Number', 
+    answerB :'New-article-Next', 
+    answerC :'Never-a-Numeral', 
+    answerD :'Noting-a-Number',
     answer: 'Not-a-Number',
 },{
     nextQuestion : 'Inside which HTML element do you put JavaScript?',
-    a1 :'<javascript>', 
-    a2 :'<code>', 
-    a3 :'<script>', 
-    a4 :'<js>',
+    answerA :'<javascript>', 
+    answerB :'<code>', 
+    answerC :'<script>', 
+    answerD :'<js>',
     answer : '<script>',
 },{
     nextQuestion : 'Which operator is used to declare a variable?',
-    a1 :'*', 
-    a2 :'-', 
-    a3 :'===',
-    a4 : '=',
+    answerA :'*', 
+    answerB :'-', 
+    answerC :'===',
+    answerD : '=',
     answer : '=',
 },{
     nextQuestion : 'What is the correct syntax for displaying a console log?',
-    a1 :'console.log;',
-    a2 :'log.console()',
-    a3 :'console.log[]',
-    a4 :'console.log()',
+    answerA :'console.log;',
+    answerB :'log.console()',
+    answerC :'console.log[]',
+    answerD :'console.log()',
     answer :'console.log',
 },]
 
@@ -94,15 +95,35 @@ function startGame() {
 //Move page to first question when 
 function showQuestions() {
     var quest = questions[questionCount];
+    //if (questionCount === lastQuestion){
+      //  finalScore();
+    //}
     nextQuestion.innerHTML = quest.nextQuestion;
-    a1.textContent = quest.a1;
-    a2.textContent = quest.a2;
-    a3.textContent = quest.a3;
-    a4.textContent = quest.a4;
+    answerA.textContent = quest.answerA;
+    answerB.textContent = quest.answerB;
+    answerC.textContent = quest.answerC;
+    answerD.textContent = quest.answerD;
 };
+
+//check if the answer is correct
+function answerCheck(answer){
+    var right = questions[questionCount].answer;
+    if (answer === right && questionCount !== questions.length){
+        score++;
+        questionCount++;
+        showQuestions();
+    }
+    else if (answer !== right && questionCount !== questions.length){
+        questionCount++;
+        showQuestions();
+    }
+    
+}
 
 
 //Start game on click 
-start.addEventListener('click', function (){
-    startGame()
-})
+start.addEventListener('click', startGame());
+answerA.addEventListener('click', answerCheck());
+answerB.addEventListener('click', answerCheck());
+answerC.addEventListener('click', answerCheck());
+answerD.addEventListener('click', answerCheck());
