@@ -15,10 +15,10 @@ var welcome = document.getElementById('welcome');
 var start = document.getElementById('play-button');
 var questionsDiv = document.querySelector('#questions');
 var nextQuestion = document.getElementById('next-question');
-var a1 = document.getElementById('1');
-var a2 = document.getElementById('2');
-var a3 = document.getElementById('3');
-var a4 = document.getElementById('4');
+var a1 = document.getElementById('button1');
+var a2 = document.getElementById('button2');
+var a3 = document.getElementById('button3');
+var a4 = document.getElementById('button4');
 var answerButton = document.getElementById('answer-button');
 var record = document.getElementById('record');
 var initials = document.getElementById('initials');
@@ -34,40 +34,40 @@ var questionCount = 0;
 
 //Questions:
 var questions = [ {
-    nextQuestion: 'What is the name of the default JavaScript behavior of moving variables and declarative functions to the top?',
-    a1:'Trebuche',
-    a2:'Hoisting',
-    a3:'Lift-Off',
-    a4:'Bumping',
-    answer: 'Hoisting',
+    nextQuestion : 'What is the name of the default JavaScript behavior of moving variables and declarative functions to the top?',
+    a1 :'Trebuche',
+    a2 :'Hoisting',
+    a3 :'Lift-Off',
+    a4 :'Bumping',
+    answer : 'Hoisting',
 },{
     nextQuestion :'What is NaN?',
-    a1:'Not-a-Number', 
-    a2:'New-article-Next', 
-    a3:'Never-a-Numeral', 
-    a4:'Noting-a-Number',
+    a1 :'Not-a-Number', 
+    a2 :'New-article-Next', 
+    a3 :'Never-a-Numeral', 
+    a4 :'Noting-a-Number',
     answer: 'Not-a-Number',
 },{
-    nextQuestion: 'Inside which HTML element do you put JavaScript?',
-    a1:'<javascript>', 
-    a2:'<code>', 
-    a3:'<script>', 
-    a4:'<js>',
+    nextQuestion : 'Inside which HTML element do you put JavaScript?',
+    a1 :'<javascript>', 
+    a2 :'<code>', 
+    a3 :'<script>', 
+    a4 :'<js>',
     answer : '<script>',
 },{
-    nextQuestion: 'Which operator is used to declare a variable?',
-    a1:'*', 
-    a2:'-', 
-    a3:'===',
-    a4: '=',
-    answer: '=',
+    nextQuestion : 'Which operator is used to declare a variable?',
+    a1 :'*', 
+    a2 :'-', 
+    a3 :'===',
+    a4 : '=',
+    answer : '=',
 },{
-    nextQuestion: 'What is the correct syntax for displaying a console log?',
-    a1:'console.log;',
-    a2:'log.console()',
-    a3:'console.log[]',
-    a4:'console.log()',
-    answer:'console.log',
+    nextQuestion : 'What is the correct syntax for displaying a console log?',
+    a1 :'console.log;',
+    a2 :'log.console()',
+    a3 :'console.log[]',
+    a4 :'console.log()',
+    answer :'console.log',
 },]
 
 welcome.style.display ="block";
@@ -95,10 +95,10 @@ function startGame() {
 function showQuestions() {
     var quest = questions[questionCount];
     nextQuestion.innerHTML = quest.nextQuestion;
-    a1.innerhtml = quest.a1;
-    a2.innerhtml = quest.a2;
-    a3.innerhtml = quest.a3;
-    a4.innerhtml = quest.a4;
+    a1.textContent = quest.a1;
+    a2.textContent = quest.a2;
+    a3.textContent = quest.a3;
+    a4.textContent = quest.a4;
 };
 
 
