@@ -26,6 +26,7 @@ var submit = document.getElementById('submit');
 var timerContainer = document.getElementById('timer-container');
 var timeKeeping = document.getElementById('timekeeping');
 var timer = document.getElementById('timer');
+var finalScore = document.getElementById('final-score');
 
 //Starting variables:
 var timeRemain = 0;
@@ -40,35 +41,35 @@ var questions = [{
     answerB :'Hoisting',
     answerC :'Lift-Off',
     answerD :'Bumping',
-    answer : 'Hoisting',
+    correct : 'Hoisting',
 },{
     nextQuestion :'What is NaN?',
     answerA :'Not-a-Number', 
     answerB :'New-article-Next', 
     answerC :'Never-a-Numeral', 
     answerD :'Noting-a-Number',
-    answer: 'Not-a-Number',
+    correct: 'Not-a-Number',
 },{
     nextQuestion : 'Inside which HTML element do you put JavaScript?',
     answerA :'<javascript>', 
     answerB :'<code>', 
     answerC :'<script>', 
     answerD :'<js>',
-    answer : '<script>',
+    correct : '<script>',
 },{
     nextQuestion : 'Which operator is used to declare a variable?',
     answerA :'*', 
     answerB :'-', 
     answerC :'===',
     answerD : '=',
-    answer : '=',
+    correct : '=',
 },{
     nextQuestion : 'What is the correct syntax for displaying a console log?',
     answerA :'console.log;',
     answerB :'log.console()',
     answerC :'console.log[]',
     answerD :'console.log()',
-    answer :'console.log',
+    correct :'console.log',
 },]
 
 welcome.style.display ="block";
@@ -86,7 +87,7 @@ function startGame() {
         timer.textContent = timeRemain;
         if (timeRemain === 0 || questions.length === questionCount){
             clearInterval(countdown);
-            score();
+            
         }
     }, 1000);
     showQuestions();
@@ -94,32 +95,43 @@ function startGame() {
 
 //Move page to first question when 
 function showQuestions() {
+    var questObjects = questions.length - 1;
     var quest = questions[questionCount];
-    //if (questionCount === lastQuestion){
-      //  finalScore();
-    //}
-    nextQuestion.innerHTML = quest.nextQuestion;
-    answerA.textContent = quest.answerA;
-    answerB.textContent = quest.answerB;
-    answerC.textContent = quest.answerC;
-    answerD.textContent = quest.answerD;
+    if (questionCount <= questObjects){
+        nextQuestion.innerHTML = quest.nextQuestion;
+        answerA.textContent = quest.answerA;
+        answerB.textContent = quest.answerB;
+        answerC.textContent = quest.answerC;
+        answerD.textContent = quest.answerD;
+    }
+    
 };
 
 //check if the answer is correct
-function answerCheck(answer){
-    var right = questions[questionCount].answer;
-    if (answer === right && questionCount !== questions.length){
-        score++;
+//Ask why all answers are showing as incorrect??????
+function answerCheck(correct){
+    var right = questions[questionCount].correct;
+    if (correct == right){
         questionCount++;
         showQuestions();
     }
-    else if (answer !== right && questionCount !== questions.length){
+    else {
         questionCount++;
         timeRemain = timeRemain - 10;
+        console.log('incorrect');
         showQuestions();
     }
+    return gameOver();
 };
 
-
+//end of game
+function gameOver(){
+    if (questionCount >= 5 || timeRemain <= 0) {
+        questionsDiv.style.display = "none";
+        record.style.display = "block";
+        document.getElementById('final-score').innerHTML = 'You scored ' + timeRemain + ' points!';
+        timerContainer.style.display = "none";
+    }
+}
 //Start game on click 
 start.addEventListener('click', startGame);
