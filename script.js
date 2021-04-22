@@ -115,15 +115,11 @@ function answerCheck(answer){
     }
     else if (answer !== right && questionCount !== questions.length){
         questionCount++;
+        timeRemain = timeRemain - 10;
         showQuestions();
     }
-    
-}
+};
 
 
 //Start game on click 
-start.addEventListener('click', startGame());
-answerA.addEventListener('click', answerCheck());
-answerB.addEventListener('click', answerCheck());
-answerC.addEventListener('click', answerCheck());
-answerD.addEventListener('click', answerCheck());
+start.addEventListener('click', startGame);
