@@ -27,12 +27,16 @@ var timerContainer = document.getElementById('timer-container');
 var timeKeeping = document.getElementById('timekeeping');
 var timer = document.getElementById('timer');
 var finalScore = document.getElementById('final-score');
+var topScores = document.getElementById('topScores');
+var storedScores = [];
 
 //Starting variables:
 var timeRemain = 0;
 var score = 0;
 var questionCount = 0;
 
+//Score Storage for high scores page:
+var scoreStorage = JSON.parse(localStorage.getItem("scoreInfo"));
 
 //Questions:
 var questions = [{
@@ -78,10 +82,13 @@ record.style.display = "none";
 
 //Starts game and begins timer
 function startGame() {
+    if (scoreStorage !== null) {
+        playerScores = scoreStorage;
+    }
     timeRemain = 60;
     welcome.style.display = "none";
     questionsDiv.style.display = "block";
-
+    
     var countdown = setInterval(function() {
         timeRemain--;
         timer.textContent = timeRemain;
@@ -134,22 +141,15 @@ function gameOver(){
     }
 }
 
-function highScore(){
-    var enteredInitials = initials.value 
-    var topScores = localStorage.getItem("scores");
-    var list = {
-        userInput: enteredInitials,
-        userScore: timeRemain,
+function highScores(x, y) {
+    var scoreInfo = {
+        callSign: x,
+        gameResult: y
     };
-
-    if (topScores == null) {
-        localStorage.setItem('scores', JSON.stringify([list]));
-    }
-    else {
-        var scoreList = JSON.parse("scores");
-        scoreList.push(list);
-        localStorage.setItem("scores", JSON.stringify(scores));
-    }
+    storedScores.push(scoreInfo);
+    localStorage.setItem("scoreInfo", JSON.stringify(storedScores));
+    topScores.style.display = "block";
 }
+
 //Start game on click 
 start.addEventListener('click', startGame);
