@@ -133,5 +133,23 @@ function gameOver(){
         timerContainer.style.display = "none";
     }
 }
+
+function highScore(){
+    var enteredInitials = initials.value 
+    var topScores = localStorage.getItem("scores");
+    var list = {
+        userInput: enteredInitials,
+        userScore: timeRemain,
+    };
+
+    if (topScores == null) {
+        localStorage.setItem('scores', JSON.stringify([list]));
+    }
+    else {
+        var scoreList = JSON.parse("scores");
+        scoreList.push(list);
+        localStorage.setItem("scores", JSON.stringify(scores));
+    }
+}
 //Start game on click 
 start.addEventListener('click', startGame);
