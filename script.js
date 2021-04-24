@@ -37,7 +37,7 @@ var score = 0;
 var questionCount = 0;
 
 //Score Storage for high scores page:
-var scoreStorage = JSON.parse(localStorage.getItem("scoreInfo"));
+var scoreStorage = JSON.parse(localStorage.getItem("scoreInfo")) || [];
 var storedScores = [];
 
 //Questions:
@@ -86,7 +86,7 @@ topScores.style.display = "none";
 //Starts game and begins timer
 function startGame() {
     if (scoreStorage !== null) {
-        playerScores = scoreStorage;
+        storedScores = scoreStorage;
     }
     timeRemain = 60;
     welcome.style.display = "none";
@@ -144,37 +144,51 @@ function gameOver(){
     }
 }
 
-function highScores(x, y) {
-    var scoreInfo = {
-        callSign: document.getElementById('initials').value,
-        gameResult: timeRemain,
-    };
-    storedScores.push(scoreInfo);
-    localStorage.setItem("scoreInfo", JSON.stringify(storedScores));
-    topScores.style.display = "block";
-    record.style.display = "none";
-}
-/*submit.addEventListener('click', function(){
-    let input = document.getElementById('initials').value;
-    highScores(input, timeRemain)
-});*/
-
-function topSdisplay(){
-    if (scoreStorage !== null) {
-        var list = document.createElement('ol');
-        list.className = "topScoreClass";
-        for (i = 0; i < scoreStorage.length; i++) {
-            var init = scoreStorage[i].callSign;
-            var scores = scoreStorage[i].gameResult;
-            var entered = document.createElement('li');
-            entered.innerHTML = init + "       " + scores;
-            list.appendChild(entered);
-        }
-        scoreKeeper.appendChild(entered);
+function recordScore() {
+    var init = document.querySelector('#initials').value;
+    if (init === ""){
+        init = "Unknown";
     }
-};
-topSdisplay();
+    localStorage.setItem(init, timeRemain);
+    document.querySelector("#scoreKeeper").textContent = " ";
+    var list = document.createElement("p");
+    list.textContent = "Player: " + init + " --> " + timeRemain;
+    document.querySelector("#scoreKeeper").appendChild(list);
+}
+
+//Event Listeners:
 //Start game on click 
 start.addEventListener('click', startGame);
-submit.addEventListener('click', highScores);
-playAgain.addEventListener('click', startGame);
+//Submit Score/Initials
+submit.addEventListener('click', function(event){
+    event.preventDefault();
+    recordScore();
+    record.style.display = 'none';
+    document.querySelector('#topScores').style.display = 'block';
+    document.querySelector('#scoreKeeper').style.display = 'block';
+});
+//Play another round when play again button is clicked
+playAgain.addEventListener('click', function() {
+    questionCount = 0;
+    timeRemain = 60;
+    welcome.style.display = 'block';
+    topScores.style.display = 'none';
+    timerContainer.style.display = 'block';
+    timer.textContent = 60;
+});
+//View high scores when "View high Scores" link is clicked
+highscore.addEventListener('click', function() {
+    welcome.style.display = 'none';
+    topScores.style.display = 'none';
+    timerContainer.style.display = 'none';
+    topScores.style.display = 'block';
+    for (let i = 0; i < localStorage.length; i++) {
+        var p = document.createElement('p');
+        var player = localStorage.key(i);
+        var score = localStorage.getItem(localStorage.key(i));
+        p.textContent = "Player: " + player + " --> " + score;
+        document.querySelector('#scoreKeeper').appendChild(p);
+        
+    }
+
+})
