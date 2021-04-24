@@ -28,7 +28,8 @@ var timeKeeping = document.getElementById('timekeeping');
 var timer = document.getElementById('timer');
 var finalScore = document.getElementById('final-score');
 var topScores = document.getElementById('topScores');
-var storedScores = [];
+var playAgain = document.getElementById('playAgain');
+var scoreKeeper = document.querySelector('#scoreKeeper');
 
 //Starting variables:
 var timeRemain = 0;
@@ -37,6 +38,7 @@ var questionCount = 0;
 
 //Score Storage for high scores page:
 var scoreStorage = JSON.parse(localStorage.getItem("scoreInfo"));
+var storedScores = [];
 
 //Questions:
 var questions = [{
@@ -79,6 +81,7 @@ var questions = [{
 welcome.style.display ="block";
 questionsDiv.style.display ="none";
 record.style.display = "none";
+topScores.style.display = "none";
 
 //Starts game and begins timer
 function startGame() {
@@ -143,13 +146,35 @@ function gameOver(){
 
 function highScores(x, y) {
     var scoreInfo = {
-        callSign: x,
-        gameResult: y
+        callSign: document.getElementById('initials').value,
+        gameResult: timeRemain,
     };
     storedScores.push(scoreInfo);
     localStorage.setItem("scoreInfo", JSON.stringify(storedScores));
     topScores.style.display = "block";
+    record.style.display = "none";
 }
+/*submit.addEventListener('click', function(){
+    let input = document.getElementById('initials').value;
+    highScores(input, timeRemain)
+});*/
 
+function topSdisplay(){
+    if (scoreStorage !== null) {
+        var list = document.createElement('ol');
+        list.className = "topScoreClass";
+        for (i = 0; i < scoreStorage.length; i++) {
+            var init = scoreStorage[i].callSign;
+            var scores = scoreStorage[i].gameResult;
+            var entered = document.createElement('li');
+            entered.innerHTML = init + "       " + scores;
+            list.appendChild(entered);
+        }
+        scoreKeeper.appendChild(entered);
+    }
+};
+topSdisplay();
 //Start game on click 
 start.addEventListener('click', startGame);
+submit.addEventListener('click', highScores);
+playAgain.addEventListener('click', startGame);
