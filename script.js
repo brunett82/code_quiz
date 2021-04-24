@@ -19,14 +19,11 @@ var answerA = document.getElementById('button1');
 var answerB= document.getElementById('button2');
 var answerC= document.getElementById('button3');
 var answerD = document.getElementById('button4');
-var answerButton = document.getElementById('answer-button');
 var record = document.getElementById('record');
-var initials = document.getElementById('initials');
 var submit = document.getElementById('submit');
 var timerContainer = document.getElementById('timer-container');
 var timeKeeping = document.getElementById('timekeeping');
 var timer = document.getElementById('timer');
-var finalScore = document.getElementById('final-score');
 var topScores = document.getElementById('topScores');
 var playAgain = document.getElementById('playAgain');
 var scoreKeeper = document.querySelector('#scoreKeeper');
@@ -75,7 +72,7 @@ var questions = [{
     answerB :'log.console()',
     answerC :'console.log[]',
     answerD :'console.log()',
-    correct :'console.log',
+    correct :'console.log()',
 },]
 
 welcome.style.display ="block";
@@ -105,7 +102,6 @@ function startGame() {
 
 //Move page to first question when 
 function showQuestions() {
-    
     var questObjects = questions.length - 1;
     var quest = questions[questionCount];
     if (questionCount <= questObjects){
@@ -119,7 +115,6 @@ function showQuestions() {
 };
 
 //check if the answer is correct
-//Ask why all answers are showing as incorrect??????
 function answerCheck(event){
     var right = questions[questionCount].correct;
     if (right === event.target.textContent){
@@ -144,7 +139,7 @@ function gameOver(){
         timerContainer.style.display = "none";
     }
 }
-
+//record score to local storage and display in high scores
 function recordScore() {
     var init = document.querySelector('#initials').value;
     if (init === ""){
@@ -153,8 +148,8 @@ function recordScore() {
     localStorage.setItem(init, timeRemain);
     document.querySelector("#scoreKeeper").textContent = " ";
     var list = document.createElement("p");
-    list.textContent = "Last Game:  Player: " + init + " --> " + timeRemain;
-    document.querySelector("#scoreKeeper").appendChild(list[0]);
+    list.textContent = "Last Game:  Player: " + init + " > " + timeRemain;
+    document.querySelector("#scoreKeeper").appendChild(list);
 }
 
 //Event Listeners:
