@@ -10,13 +10,18 @@
 <body>
     <header>
         <nav id="navigation">
-            <a id="high-score" href="#">View High Scores</a>
+            <a id="high-score" href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                View High Scores</a>
         </nav>
     </header>
-    <main>
-       <section>
+    <main class="back">
+       <section class="main-box">
             <div id="welcome">
-                <h1>Coding Quiz!</h1>
+                <h1>JavaScript Quiz!</h1>
                 <h4>This quiz will test your knowledge of JavaScript fundamentals.</h4>
                 <h4>Try to answer all the questions in 60 seconds or less.</h4>
                 <h4>If you answer a question incorrectly, you will lose 10 seconds!</h4>
@@ -25,10 +30,10 @@
             <div id="questions">
                 <h3 id="next-question"></h3>
                 <ul>
-                    <li><button id="button1" onclick="answerCheck('button1')"></button></li>
-                    <li><button id="button2" onclick="answerCheck('button2')"></button></li>
-                    <li><button id="button3" onclick="answerCheck('button3')"></button></li>
-                    <li><button id="button4" onclick="answerCheck('button4')"></button></li>
+                    <li><button id="button1" onclick="answerCheck(event)"></button></li>
+                    <li><button id="button2" onclick="answerCheck(event)"></button></li>
+                    <li><button id="button3" onclick="answerCheck(event)"></button></li>
+                    <li><button id="button4" onclick="answerCheck(event)"></button></li>
                 </ul>
             </div>
             <div id="record">
@@ -38,13 +43,13 @@
                 <button id="submit">Submit</button>
             </div>
         </section>
-        <section>
-            <div id="timer-container">
+        <section 
+            <div id="timer-container" class="time-box">
                 <h1 id="timekeeping">Time Remaining: <span id="timer">60</span></h1>
             </div>
         </section>
         <section id="topScores">
-            <h1 id="scoreBox">Top Scores:</h1>
+            <h1 id="scoreBox">High Scores:</h1>
             <div id="scoreKeeper"></div>
             <button id="playAgain">Click to Play!</button>
         </section> 

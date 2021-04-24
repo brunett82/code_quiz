@@ -105,6 +105,7 @@ function startGame() {
 
 //Move page to first question when 
 function showQuestions() {
+    
     var questObjects = questions.length - 1;
     var quest = questions[questionCount];
     if (questionCount <= questObjects){
@@ -119,9 +120,9 @@ function showQuestions() {
 
 //check if the answer is correct
 //Ask why all answers are showing as incorrect??????
-function answerCheck(correct){
+function answerCheck(event){
     var right = questions[questionCount].correct;
-    if (correct == right){
+    if (right === event.target.textContent){
         questionCount++;
         showQuestions();
     }
@@ -152,8 +153,8 @@ function recordScore() {
     localStorage.setItem(init, timeRemain);
     document.querySelector("#scoreKeeper").textContent = " ";
     var list = document.createElement("p");
-    list.textContent = "Player: " + init + " --> " + timeRemain;
-    document.querySelector("#scoreKeeper").appendChild(list);
+    list.textContent = "Last Game:  Player: " + init + " --> " + timeRemain;
+    document.querySelector("#scoreKeeper").appendChild(list[0]);
 }
 
 //Event Listeners:
@@ -186,9 +187,8 @@ highscore.addEventListener('click', function() {
         var p = document.createElement('p');
         var player = localStorage.key(i);
         var score = localStorage.getItem(localStorage.key(i));
-        p.textContent = "Player: " + player + " --> " + score;
+        p.textContent = "Player: " + player + "  " + score;
         document.querySelector('#scoreKeeper').appendChild(p);
-        
     }
 
 })
